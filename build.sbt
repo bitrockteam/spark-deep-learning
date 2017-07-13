@@ -1,28 +1,22 @@
 name := "spark-deep-learning"
 
-version := "1.0"
+version := "1.1"
 
-scalaVersion := "2.10.4"
+scalaVersion := "2.11.11"
 
-// Scala dependencies
-libraryDependencies += "org.scala-lang" % "scala-library" % "2.10.4"
+libraryDependencies += "org.nd4j" % "nd4j-native-platform" % "0.8.0"
 
-libraryDependencies += "org.scala-lang" % "scala-reflect" % "2.10.4"
+libraryDependencies += "org.deeplearning4j" % "dl4j-spark_2.11" % "0.8.0_spark_1"
 
-// Spark dependencies
-libraryDependencies += "org.apache.spark" % "spark-mllib_2.10" % "1.3.1"
+libraryDependencies += "org.nd4j" % "nd4j-api" % "0.8.0"
 
-libraryDependencies += "org.apache.spark" % "spark-core_2.10" % "1.3.1"
+libraryDependencies += "com.typesafe" % "config" % "1.3.1"
 
-// N-Dimensional Arrays for Java dependencies
-libraryDependencies += "org.nd4j" % "nd4j-x86" % "0.4-rc3.8"
-
-libraryDependencies += "org.nd4j" % "nd4j-jcublas-7.0" % "0.4-rc3.8"
-
-libraryDependencies += "org.nd4j" % "nd4j-api" % "0.4-rc3.8"
-
-// Deeplearning4j dependencies
-libraryDependencies += "org.deeplearning4j" % "dl4j-spark" % "0.4-rc3.8"
-
-// Typesafe dependencies
-libraryDependencies += "com.typesafe" % "config" % "1.3.0"
+def latestScalafmt = "1.1.0"
+commands += Command.args("scalafmt", "Run scalafmt cli.") {
+  case (state, args) =>
+    val Right(scalafmt) =
+      org.scalafmt.bootstrap.ScalafmtBootstrap.fromVersion(latestScalafmt)
+    scalafmt.main("--non-interactive" +: args.toArray)
+    state
+}
