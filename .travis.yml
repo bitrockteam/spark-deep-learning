@@ -4,4 +4,4 @@ jdk:
 scala:
    - 2.11.11
 script:
-   - sbt clean scalafmtTest test
+   - sbt clean "scalafmt --test" test
